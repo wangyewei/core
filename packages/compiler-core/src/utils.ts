@@ -62,7 +62,7 @@ export function isCoreComponent(tag: string): symbol | void {
   }
 }
 
-const nonIdentifierRE = /^\d|[^\$\w]/
+const nonIdentifierRE = /^\d|[^$\w\u4e00-\u9fa5]/
 export const isSimpleIdentifier = (name: string): boolean =>
   !nonIdentifierRE.test(name)
 
@@ -444,6 +444,7 @@ export function hasScopeRef(
   if (!node || Object.keys(ids).length === 0) {
     return false
   }
+
   switch (node.type) {
     case NodeTypes.ELEMENT:
       for (let i = 0; i < node.props.length; i++) {
